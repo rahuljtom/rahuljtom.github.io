@@ -1,17 +1,386 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rahul Joseph Thomas | Backend & AI Infrastructure</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Joseph Thomas | Portfolio</title>
+    <meta name="description" content="Portfolio of Rahul Joseph Thomas — backend reliability engineer and AI infrastructure builder based in Bangalore.">
+    <meta name="author" content="Rahul Joseph Thomas">
+    <link rel="canonical" href="https://rahuljtom.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rahuljtom.github.io/">
+    <meta property="og:title" content="Rahul Thomas | Portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#f5eedf">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[var(--bg)] text-[var(--text)] antialiased min-h-screen selection:bg-[var(--accent)] selection:text-[#141210]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="sunny" aria-hidden="true">
+        <div class="sunny__wrap">
+            <div class="sunny__layer"></div>
+        </div>
+        <svg class="sunny__filter" aria-hidden="true">
+            <filter id="wind" x="-3%" y="-3%" width="106%" height="106%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4" result="noise">
+                    <animate attributeName="baseFrequency" values="0.016;0.022;0.016" dur="18s" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="18">
+                    <animate attributeName="scale" values="14;22;28;22;14" dur="24s" repeatCount="indefinite"/>
+                </feDisplacementMap>
+            </filter>
+        </svg>
+    </div>
+
+    <nav class="pill-nav hidden" aria-label="Main Navigation">
+        <span class="nav-brand">RAHUL JOSEPH THOMAS</span>
+        <div class="nav-links">
+            <a href="#about">about</a>
+            <a href="#projects">projects</a>
+            <a href="#background">experience</a>
+        </div>
+    </nav>
+
+    <main class="shell">
+        <section class="hero" id="top">
+            <h1 data-beat-glyph="hero">RAHUL JOSEPH THOMAS</h1>
+        </section>
+
+        <div class="marquee-container" aria-hidden="true">
+            <div class="marquee">
+                +++ RAHUL JOSEPH THOMAS +++ BACKEND RELIABILITY +++ AI INFRASTRUCTURE +++ SYSTEM ARCHITECTURE +++ RAHUL JOSEPH THOMAS +++ BACKEND RELIABILITY +++ AI INFRASTRUCTURE +++ SYSTEM ARCHITECTURE +++
+            </div>
+        </div>
+
+        <section id="about">
+            <span class="section-marker">
+                <span class="section-marker__num">01</span> about
+            </span>
+            <h2 data-beat-glyph="section">About me.</h2>
+            <div class="about__photo" tabindex="0" aria-label="Rahul Joseph Thomas">
+
+                <img src="images/rahul-headshot.jpg" alt="Rahul Joseph Thomas">
+            
+            </div>
+            <div class="about-content">
+                <p class="lede">
+                    I'm a Computer Science student at VIT Vellore focused on backend reliability,
+                    AI infrastructure, and platform engineering. I build systems that handle failure
+                    gracefully — cached responses when providers go down, circuit breakers when
+                    databases struggle, retries when networks flake.
+                </p>
+                <p class="ink-soft">
+                    I don't chase trends — I build systems that don't break. My work centers on
+                    making APIs fast, caches smart, and failures invisible to users. Currently seeking
+                    Summer 2026 internships (May–July) in platform engineering, AI infrastructure,
+                    or backend reliability roles.
+                </p>
+            </div>
+
+            <div class="badge-card" aria-hidden="true">
+                <div class="badge-card__hole"></div>
+                <div class="badge-card__tier">SYSADMIN ACCESS</div>
+                <div class="badge-card__graphic">
+                    <div class="badge-card__dither"></div>
+                    <div class="badge-card__code">
+                        <div class="badge-card__square"></div>
+                        <div class="badge-card__numbers"><span>2</span><span>0</span><span>7</span></div>
+                    </div>
+                </div>
+                <div class="badge-card__name">Rahul J.<br>Thomas</div>
+                <div class="badge-card__lab">Reliability Engineering Lab</div>
+            </div>
+            <div class="meta-links">
+                <a href="mailto:rahuljtoms@gmail.com" class="meta-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    rahuljtoms@gmail.com
+                </a>
+                <span class="meta-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Bangalore, Karnataka, India
+                </span>
+                <span class="meta-socials">
+                    <a href="https://github.com/rahuljtom" target="_blank" rel="noopener">github</a> · 
+                    <a href="#" target="_blank" rel="noopener">linkedin</a>
+                </span>
+            </div>
+
+            <div class="experience-label">PROFESSIONAL EXPERIENCE</div>
+            <ul class="work__list">
+                <li class="work__item">
+                    <div class="work__row">
+                        <p class="work__role">
+                            <span class="title">Software Engineering Intern</span> 
+                            <span class="at">at</span> 
+                            <span class="co">Hatio Innovations Pvt. Ltd.</span>
+                        </p>
+                        <span class="work__date">Jun 2025 — Aug 2025</span>
+                        <button class="disclose" type="button" aria-expanded="false">
+                            <span class="disclose-text">More</span> <span class="caret">↓</span>
+                        </button>
+                    </div>
+                    <div class="work__details">
+                        <p class="work__summary">Built Java/Spring Boot backend for supply-chain workflow automation</p>
+                        <ul>
+                            <li>Optimized PostgreSQL queries — reduced p95 latency by 40%</li>
+                            <li>Designed batch data pipelines processing 50K+ records</li>
+                            <li>Implemented CI/CD with Docker + Jenkins</li>
+                        </ul>
+                        <div class="tags">
+                            <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>Docker</span><span>Jenkins</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="work__item">
+                    <div class="work__row">
+                        <p class="work__role">
+                            <span class="title">Core Committee</span> 
+                            <span class="at">at</span> 
+                            <span class="co">GDG VIT Vellore</span>
+                        </p>
+                        <span class="work__date">2024 — Present</span>
+                        <button class="disclose" type="button" aria-expanded="false">
+                            <span class="disclose-text">More</span> <span class="caret">↓</span>
+                        </button>
+                    </div>
+                    <div class="work__details">
+                        <p class="work__summary">Technical programs and developer community building</p>
+                        <ul>
+                            <li>Organized workshops on developer tools and infrastructure</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <span class="section-marker">
+                <span class="section-marker__num">02</span> projects
+            </span>
+            <h2 data-beat-glyph="section">Projects.</h2>
+            <p class="subtitle">Shipped systems, not tutorials.</p>
+            
+            <div class="departures-wrapper">
+                <table class="departures">
+                    <thead>
+                        <tr>
+                            <th>Flight</th>
+                            <th>Destination ↑</th>
+                            <th>Departing</th>
+                            <th>Gate</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LLM01</td>
+                            <td>Inference Gateway</td>
+                            <td>12:00</td>
+                            <td>PY/GO</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>TXN99</td>
+                            <td>Transaction API</td>
+                            <td>08:00</td>
+                            <td>PG/RD</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td>K6LB</td>
+                            <td>Reliability Lab</td>
+                            <td>14:30</td>
+                            <td>CH/OS</td>
+                            <td>In Progress</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="hint">CLICK ANY PROJECT ROW TO VIEW DETAILS.</p>
+            
+            <ul class="project-list">
+                <li class="project">
+                    <div class="project__head" role="button" tabindex="0" aria-expanded="false">
+                        <span class="project__num">01</span>
+                        <span class="project__title">
+                            LLM Inference Gateway
+                            <small>OpenAI-compatible API gateway with provider routing, semantic caching, and production observability.</small>
+                        </span>
+                        <span class="project__year">2025<span class="project__toggle">+</span></span>
+                    </div>
+                    <div class="project__body">
+                        <div class="project__inner">
+                            <div class="project__image" tabindex="0">
+                                <img src="" alt="" onerror="this.style.display='none'">
+                            </div>
+                            <ul>
+                                <li>Multi-provider LLM gateway routing across OpenAI, Anthropic, Gemini, and Groq with fallback handling</li>
+                                <li>Redis semantic/exact caching — &lt;5ms cached vs ~800ms upstream</li>
+                                <li>Sliding-window RPM/TPM rate limiting with atomic Redis pipelines</li>
+                                <li>Automatic retry + provider fallback on 429/5xx/timeout</li>
+                                <li>Per-request telemetry: provider, model, latency, tokens, cost, cached status</li>
+                                <li>React observability dashboard with latency charts, provider status, token velocity</li>
+                                <li>BYOK via provider API key headers</li>
+                            </ul>
+                            <div class="tags">
+                                <span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>React</span><span>httpx</span>
+                            </div>
+                            <div class="project__links">
+                                <a href="https://github.com/rahuljtom" target="_blank" rel="noopener">Code <span class="arr">↗</span></a>
+                                <a href="#" target="_blank" rel="noopener">Live <span class="arr">↗</span></a>
+                                <a href="#" target="_blank" rel="noopener">Report <span class="arr">↗</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="project">
+                    <div class="project__head" role="button" tabindex="0" aria-expanded="false">
+                        <span class="project__num">02</span>
+                        <span class="project__title">
+                            Transaction Gateway
+                            <small>Payment-grade API reliability with idempotency, rate limiting, and circuit breaking for fintech endpoints.</small>
+                        </span>
+                        <span class="project__year">2025<span class="project__toggle">+</span></span>
+                    </div>
+                    <div class="project__body">
+                        <div class="project__inner">
+                            <div class="project__image" tabindex="0">
+                                <img src="" alt="" onerror="this.style.display='none'">
+                            </div>
+                            <ul>
+                                <li>Redis sorted-set sliding-window rate limiter (ZREMRANGEBYSCORE + ZADD + ZCARD atomic pipeline)</li>
+                                <li>Idempotency-key based duplicate transaction suppression</li>
+                                <li>Redis circuit breaker for degraded-mode resilience</li>
+                                <li>JWT authentication + bcrypt password hashing</li>
+                                <li>Load-tested with Apache Benchmark</li>
+                            </ul>
+                            <div class="tags">
+                                <span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>Cloudflare</span>
+                            </div>
+                            <div class="project__links">
+                                <a href="https://github.com/rahuljtom" target="_blank" rel="noopener">Code <span class="arr">↗</span></a>
+                                <a href="#" target="_blank" rel="noopener">Live <span class="arr">↗</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="project">
+                    <div class="project__head" role="button" tabindex="0" aria-expanded="false">
+                        <span class="project__num">03</span>
+                        <span class="project__title">
+                            Reliability Lab
+                            <small>k6 load testing, failure injection, and p50/p95/p99 benchmark reports for the LLM Gateway.</small>
+                        </span>
+                        <span class="project__year">In progress<span class="project__toggle">+</span></span>
+                    </div>
+                    <div class="project__body">
+                        <div class="project__inner">
+                            <div class="project__image" tabindex="0">
+                                <img src="" alt="" onerror="this.style.display='none'">
+                            </div>
+                            <ul>
+                                <li>k6 load tests simulating realistic traffic patterns</li>
+                                <li>Failure injection for provider outages and timeouts</li>
+                                <li>p50/p95/p99 latency benchmark reports</li>
+                                <li>Cost-per-request optimization experiments</li>
+                            </ul>
+                            <div class="tags">
+                                <span>k6</span><span>Chaos Engineering</span><span>Observability</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="background">
+            <span class="section-marker">
+                <span class="section-marker__num">03</span> background
+            </span>
+            <h2 data-beat-glyph="section">Background.</h2>
+            
+            <div class="education">
+                <p>B.Tech Computer Science at VIT Vellore (2023 — 2027)</p>
+                <p class="ink-soft">CSBS (Computer Science with Business Systems). CGPA: REDACTED.</p>
+            </div>
+
+            <div class="ascii-art" aria-hidden="true">
+      _________________________
+     |   |     |     |     |   |
+     |___|_____|_____|_____|___|
+     |   | [=] | [=] | [=] |   |
+     |___|_____|_____|_____|___|
+     |   | [=] | [=] | [=] |   |
+     |___|_____|_____|_____|___|
+      SYS.RELIABILITY.LAB.2026
+            </div>
+            
+            <div class="stack-section">
+                <div class="experience-label">STACK</div>
+                <div class="tags">
+                    <span>Python</span><span>TypeScript</span><span>SQL</span><span>Bash</span><span>FastAPI</span><span>Spring Boot</span><span>PostgreSQL</span><span>Redis</span><span>Docker</span><span>React</span><span>Tailwind CSS</span><span>JWT</span><span>Git</span><span>Linux</span>
+                </div>
+                <p class="learning">Learning: Kubernetes · OpenTelemetry · Prometheus/Grafana</p>
+            </div>
+        </section>
+
+        <section class="game-section" id="game">
+            <h2 class="game-title">System Defense</h2>
+            <p class="subtitle">Keep the backend alive.</p>
+            <div class="game-container">
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+                <div class="game-ui">
+                    SCORE<br>
+                    <span id="gameScore">0000</span>
+                </div>
+                <div id="gameModal" class="game-modal">
+                    <h3 id="gameModalTitle">START GAME</h3>
+                    <p>SYSTEM FAILED AT SCORE: <span id="finalScore">0</span></p>
+                    <input type="text" id="playerName" placeholder="ENTER VISITOR NAME" maxlength="12">
+                    <button id="saveScoreBtn">START / RESTART</button>
+                    
+                    <div class="high-scores">
+                        TOP AGENTS:
+                        <ol id="highScoreList">
+                            <!-- JS populated -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell">
+            <p class="footer-tools">Languages: Python · TypeScript · SQL · Bash · Java | Frameworks: FastAPI · Spring Boot · React · Tailwind | Infra: Docker · PostgreSQL · Redis · CI/CD | Focus: Backend Reliability · AI Infrastructure · Platform Engineering</p>
+            <div class="footer-bottom">
+                <span class="copyright">© 2026 Rahul Joseph Thomas</span>
+                <span class="footer-links">
+                    <a href="https://github.com/rahuljtom" target="_blank" rel="noopener">github</a> · 
+                    <a href="https://www.linkedin.com/in/rahuljosephthomas/" target="_blank" rel="noopener">linkedin</a> · 
+                    <a href="mailto:rahuljtoms@gmail.com">email</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <button id="music-toggle" class="music-toggle" aria-label="Toggle ambient music" title="Toggle ambient music">
+        <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        <svg class="icon-playing hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </button>
+    <div id="music-hint" class="music-hint hidden">Click to set the mood</div>
+
+    <audio id="ambient-audio" src="audio/Blue Planet (Qrion Remix).mp3" loop preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
 </html>
