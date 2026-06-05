@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { ReactLenis } from '@studio-freight/react-lenis';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -11,12 +9,8 @@ import { NoiseOverlay } from './components/NoiseOverlay';
 import { AudioToggle } from './components/AudioToggle';
 
 function App() {
-  // Check prefers-reduced-motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   return (
-    // If user prefers reduced motion, we disable Lenis completely
-    <ReactLenis root options={{ smoothWheel: !prefersReducedMotion, syncTouch: true }}>
+    <>
       <NoiseOverlay />
       
       <div className="relative z-10 flex flex-col min-h-screen selection:bg-accent selection:text-[#141210]">
@@ -34,7 +28,7 @@ function App() {
       </div>
       
       <AudioToggle />
-    </ReactLenis>
+    </>
   );
 }
 
