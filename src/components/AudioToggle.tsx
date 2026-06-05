@@ -2,19 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { Howl } from 'howler';
 
-// Using a placeholder royalty-free ambient track URL (or local if we had one)
-// We'll use a reliable public domain ambient track URL or data URI if none available.
-// For now, I'll use a placeholder URL from a free source or Wikipedia's public domain audio.
-// Wait, the prompt says "royalty-free warm ambient track at volume 0.25, loop".
-// I will just put a placeholder URL and note it.
-const AUDIO_URL = 'https://upload.wikimedia.org/wikipedia/commons/7/75/Apollo_11_Moon_Landing_ambient_sound.ogg'; // placeholder
+// I'm using a placeholder ambient track here.
+const AUDIO_URL = 'https://upload.wikimedia.org/wikipedia/commons/7/75/Apollo_11_Moon_Landing_ambient_sound.ogg';
 
 export function AudioToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
   const soundRef = useRef<Howl | null>(null);
 
   useEffect(() => {
-    // Check local storage preference
+    // I check local storage for preferences.
     const savedPref = localStorage.getItem('ambient_audio_pref');
     const shouldPlay = savedPref === 'true';
 
@@ -22,7 +18,7 @@ export function AudioToggle() {
       src: [AUDIO_URL],
       loop: true,
       volume: 0.25,
-      preload: shouldPlay, // Only preload if they opted in previously or when they click
+      preload: shouldPlay, // I only preload if opted in.
     });
 
     if (shouldPlay) {
@@ -43,7 +39,7 @@ export function AudioToggle() {
       setIsPlaying(false);
       localStorage.setItem('ambient_audio_pref', 'false');
     } else {
-      // Force load if not preloaded
+      // I force load if it isn't preloaded.
       if (soundRef.current.state() === 'unloaded') {
         soundRef.current.load();
       }
