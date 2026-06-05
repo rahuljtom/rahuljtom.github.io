@@ -151,8 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
     const beatElements = document.querySelectorAll('[data-beat-glyph]');
-    const BPM = 120;
-    const beatInterval = 60000 / BPM; // 500ms per beat
+    const BPM = 480;
+    const beatInterval = 60000 / BPM; // 125ms per beat
 
     // Wrap chars in spans
     beatElements.forEach(el => {
@@ -220,6 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     requestAnimationFrame(loop);
+
+    // --- Intersection Observer for Game Dark Mode ---
+    const gameSection = document.getElementById('game');
+    if (gameSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(gameSection);
+    }
 
     // --- Breakout Game Logic ---
     const canvas = document.getElementById('gameCanvas');

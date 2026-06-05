@@ -44,7 +44,18 @@ body {
   font-size: 14px;
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: crosshair;
+  cursor: url('images/cursor-default.png'), auto;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode {
+    --bg: #111;
+    --bg-soft: #222;
+    --ink: #eee;
+    --ink-soft: #aaa;
+    --rule: #333;
+    --rule-strong: #444;
+    --accent: #5bb37d;
 }
 
 body::before {
@@ -72,7 +83,7 @@ a {
   color: inherit;
   text-decoration: none;
   transition: color 250ms var(--ease);
-  cursor: crosshair;
+  cursor: url('images/cursor-pointer.png'), pointer;
 }
 
 a:hover {
@@ -80,7 +91,7 @@ a:hover {
 }
 
 button {
-  cursor: crosshair;
+  cursor: url('images/cursor-pointer.png'), pointer;
 }
 
 ul {
@@ -730,11 +741,16 @@ h2 {
     padding: 1.5rem;
     width: 100%;
     max-width: 320px;
-    margin: 4rem auto;
+    margin: 4rem 0 2rem 1rem;
+    transform: rotate(-3deg);
     font-family: 'Departure Mono', 'JetBrains Mono', monospace;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+.badge-card:hover {
+    transform: rotate(0deg) scale(1.02);
 }
 .badge-card__hole {
     width: 60px;
@@ -759,9 +775,16 @@ h2 {
 .badge-card__dither {
     width: 65%;
     height: 90px;
-    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
-    background-size: 5px 5px;
-    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.mario-ascii {
+    font-family: 'Departure Mono', monospace;
+    font-size: 0.65rem;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0;
 }
 .badge-card__code {
     display: flex;
@@ -796,6 +819,7 @@ h2 {
 .departures-wrapper {
     overflow-x: auto;
     margin: 3rem 0;
+    width: 100%;
 }
 .departures {
     width: 100%;
@@ -805,7 +829,6 @@ h2 {
     background: #e6e2da;
     color: #1c1914;
     border: 1px solid #1c1914;
-    min-width: 600px;
 }
 .departures th, .departures td {
     padding: 0.8rem 1rem;
@@ -828,14 +851,22 @@ h2 {
 
 /* Game */
 .game-section {
-    margin: 6rem auto;
-    text-align: center;
-    max-width: 800px;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     font-family: 'Departure Mono', 'JetBrains Mono', monospace;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 .game-title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
 }
 .game-container {
@@ -845,6 +876,7 @@ h2 {
     border: 4px solid var(--ink);
     border-radius: 4px;
     overflow: hidden;
+    margin-top: 2rem;
 }
 #gameCanvas {
     display: block;
@@ -893,7 +925,7 @@ h2 {
     border: none;
     padding: 0.5rem 1rem;
     font-family: inherit;
-    cursor: crosshair;
+    cursor: url('images/cursor-pointer.png'), pointer;
     text-transform: uppercase;
     font-size: 0.9rem;
 }
@@ -913,4 +945,26 @@ h2 {
 }
 .high-scores li {
     margin-bottom: 0.2rem;
+}
+
+/* Interacting Stack */
+.interactable-stack .big-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.interactable-stack .big-tags span {
+    font-family: 'Departure Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--rule-strong);
+    background: var(--bg-soft);
+    transition: all 0.2s ease;
+    cursor: url('images/cursor-pointer.png'), pointer;
+}
+.interactable-stack .big-tags span:hover {
+    background: var(--ink);
+    color: var(--bg);
+    transform: translateY(-2px);
 }
