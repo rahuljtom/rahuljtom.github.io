@@ -151,8 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
     const beatElements = document.querySelectorAll('[data-beat-glyph]');
-    const BPM = 120;
-    const beatInterval = 60000 / BPM; // 500ms per beat
+    const BPM = 480;
+    const beatInterval = 60000 / BPM; // 125ms per beat
 
     // Wrap chars in spans
     beatElements.forEach(el => {

@@ -45,6 +45,17 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   cursor: crosshair;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode {
+    --bg: #111;
+    --bg-soft: #222;
+    --ink: #eee;
+    --ink-soft: #aaa;
+    --rule: #333;
+    --rule-strong: #444;
+    --accent: #5bb37d;
 }
 
 body::before {
@@ -730,11 +741,16 @@ h2 {
     padding: 1.5rem;
     width: 100%;
     max-width: 320px;
-    margin: 4rem auto;
+    margin: 4rem 0 2rem 1rem;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
     font-family: 'Departure Mono', 'JetBrains Mono', monospace;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     border: 1px solid #333;
+}
+.badge-card:hover {
+    transform: rotate(0deg) scale(1.02);
 }
 .badge-card__hole {
     width: 60px;
@@ -759,9 +775,16 @@ h2 {
 .badge-card__dither {
     width: 65%;
     height: 90px;
-    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
-    background-size: 5px 5px;
-    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.mario-ascii {
+    font-family: 'Departure Mono', monospace;
+    font-size: 0.65rem;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0;
 }
 .badge-card__code {
     display: flex;
@@ -828,14 +851,22 @@ h2 {
 
 /* Game */
 .game-section {
-    margin: 6rem auto;
-    text-align: center;
-    max-width: 800px;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     font-family: 'Departure Mono', 'JetBrains Mono', monospace;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 .game-title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
     text-transform: uppercase;
 }
 .game-container {
@@ -845,6 +876,7 @@ h2 {
     border: 4px solid var(--ink);
     border-radius: 4px;
     overflow: hidden;
+    margin-top: 2rem;
 }
 #gameCanvas {
     display: block;
@@ -913,4 +945,114 @@ h2 {
 }
 .high-scores li {
     margin-bottom: 0.2rem;
+}
+
+/* Retro Terminal Window */
+.terminal-window {
+    width: 100%;
+    margin: 3rem 0;
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    background: #111;
+    color: #f5eedf;
+    font-family: 'Departure Mono', 'JetBrains Mono', monospace;
+    overflow: hidden;
+}
+.terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: #222;
+    border-bottom: 1px solid var(--rule-strong);
+}
+.terminal-dots {
+    display: flex;
+}
+.terminal-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.terminal-dots span:nth-child(1) { background: #ff5f56; }
+.terminal-dots span:nth-child(2) { background: #ffbd2e; }
+.terminal-dots span:nth-child(3) { background: #27c93f; }
+.terminal-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+}
+.terminal-body {
+    padding: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.terminal-row {
+    margin-bottom: 0.5rem;
+}
+.term-time { color: #888; margin-right: 1rem; }
+.term-status { margin-right: 1rem; }
+.term-status.shipped { color: #5bb37d; }
+.term-status.active { color: #3b82f6; }
+.term-status.in-progress { color: #ffbd2e; }
+.term-process { color: #ddd; }
+.term-process.warm-text { color: #ffbd2e; }
+.term-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #ffbd2e;
+    vertical-align: middle;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Contact Me */
+.contact-me {
+    text-align: center;
+    margin: 2rem 0;
+}
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.contact-icons a {
+    color: var(--ink);
+    transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+.contact-icons a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+.contact-icons svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Interacting Stack */
+.interactable-stack .big-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.interactable-stack .big-tags span {
+    font-family: 'Departure Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--rule-strong);
+    background: var(--bg-soft);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.interactable-stack .big-tags span:hover {
+    background: var(--ink);
+    color: var(--bg);
+    transform: translateY(-2px);
 }
