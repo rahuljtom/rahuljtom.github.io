@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -11,7 +11,7 @@ export function Nav() {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 150) {
       setHidden(true);
-      setMobileMenuOpen(false); // Close menu on scroll down
+      setMobileMenuOpen(false); // I close the menu on scroll down.
     } else {
       setHidden(false);
     }
