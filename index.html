@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahul Joseph Thomas | Portfolio</title>
-    <meta name="description" content="Portfolio of Rahul Joseph Thomas — backend reliability engineer and AI infrastructure builder based in Bangalore.">
+    <title>rahuljtom | Portfolio</title>
+    <meta name="description" content="rahuljtom | Portfolio">
     <meta name="author" content="Rahul Joseph Thomas">
     <link rel="canonical" href="https://rahuljtom.github.io/">
     <meta property="og:type" content="website">
@@ -61,7 +61,7 @@
             <h2 data-beat-glyph="section">About me.</h2>
             <div class="about__photo" tabindex="0" aria-label="Rahul Joseph Thomas">
 
-                <img src="images/rahul-headshot.jpg" alt="Rahul Joseph Thomas">
+                <img src="images/sunny/rahul-headshot.png" alt="Rahul Joseph Thomas">
             
             </div>
             <div class="about-content">
@@ -81,7 +81,6 @@
 
             <div class="education">
                 <p>B.Tech Computer Science at VIT Vellore (2023 — 2027)</p>
-                <p class="ink-soft">CSBS (Computer Science with Business Systems). CGPA: REDACTED.</p>
             </div>
 
             <div class="badge-card" aria-hidden="true">
@@ -90,17 +89,29 @@
                 <div class="badge-card__graphic">
                     <div class="badge-card__dither">
                     <pre class="mario-ascii">
-   _____
-  /     \
- | () () |
-  \  ^  /
-   |||||
-   |||||
+
+
+
+
+         -''--.
+       _`>   `\.-'<         
+    _.'     _     '._
+  .'   _.='   '=._   '.
+  >_   / /_\ /_\ \   _<
+    / (  \o/\\o/  ) \
+    >._\ .-,_)-. /_.<
+jgs     /__/ \__\ 
+          '---'     E=mc^2
+
+          google
+            developer
+          groups
+                 
 </pre>
                 </div>
                     <div class="badge-card__code">
                         <div class="badge-card__square"></div>
-                        <div class="badge-card__numbers"><span>2</span><span>0</span><span>7</span></div>
+                        <div class="badge-card__numbers"><span>0</span><span>0</span><span>8</span></div>
                     </div>
                 </div>
                 <div class="badge-card__name">Rahul J.<br>Thomas</div>
@@ -121,7 +132,33 @@
                 </span>
             </div>
 
-            
+
+                <section id="experience">
+            <span class="section-marker">
+                <span class="section-marker__num">02</span> experience
+            </span>
+            <h2 data-beat-glyph="section">Experience.</h2>
+            <div class="experience-label">PROFESSIONAL EXPERIENCE</div>
+                        <ul class="work__list">
+                <li class="work__item">
+                    <div class="work__row">
+                        <p class="work__role">
+                            <span class="title">Software Engineering Intern</span> 
+                            <span class="at">at</span> 
+                            <span class="co">Hatio Innovations Pvt. Ltd.</span>
+                        </p>
+                        <span class="work__date">Jun 2025 — Aug 2025</span>
+                        <button class="disclose" type="button" aria-expanded="false">
+                            <span class="disclose-text">More</span> <span class="caret">↓</span>
+                        </button>
+                    </div>
+                    <div class="work__details">
+                        <p class="work__summary">Built Java/Spring Boot backend for supply-chain workflow automation</p>
+                        <ul>
+                            <li>Optimized PostgreSQL queries — reduced p95 latency by 40%</li>
+                            <li>Designed batch data pipelines processing 50K+ records</li>
+                            <li>Implemented CI/CD with Docker + Jenkins</li>
+                        </ul>
                         <div class="tags">
                             <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>Docker</span><span>Jenkins</span>
                         </div>
@@ -147,34 +184,6 @@
                     </div>
                 </li>
             </ul>
-        </section>
-
-                <section id="experience">
-            <span class="section-marker">
-                <span class="section-marker__num">02</span> experience
-            </span>
-            <h2 data-beat-glyph="section">Experience.</h2>
-            <div class="experience-label">PROFESSIONAL EXPERIENCE</div>
-            <ul class="work__list">
-                <li class="work__item">
-                    <div class="work__row">
-                        <p class="work__role">
-                            <span class="title">Software Engineering Intern</span> 
-                            <span class="at">at</span> 
-                            <span class="co">Hatio Innovations Pvt. Ltd.</span>
-                        </p>
-                        <span class="work__date">Jun 2025 — Aug 2025</span>
-                        <button class="disclose" type="button" aria-expanded="false">
-                            <span class="disclose-text">More</span> <span class="caret">↓</span>
-                        </button>
-                    </div>
-                    <div class="work__details">
-                        <p class="work__summary">Built Java/Spring Boot backend for supply-chain workflow automation</p>
-                        <ul>
-                            <li>Optimized PostgreSQL queries — reduced p95 latency by 40%</li>
-                            <li>Designed batch data pipelines processing 50K+ records</li>
-                            <li>Implemented CI/CD with Docker + Jenkins</li>
-                        </ul>
         </section>
 
         <section id="projects">
@@ -318,23 +327,27 @@
             <p class="subtitle">Keep the backend alive.</p>
             <div class="game-container">
                 <canvas id="gameCanvas" width="600" height="400"></canvas>
-                <div class="game-ui">
-                    SCORE<br>
-                    <span id="gameScore">0000</span>
+                <div class="game-ui" style="display:none;">
+                    <span id="gameScore"></span>
                 </div>
                 <div id="gameModal" class="game-modal">
-                    <h3 id="gameModalTitle">START GAME</h3>
-                    <p>SYSTEM FAILED AT SCORE: <span id="finalScore">0</span></p>
-                    <input type="text" id="playerName" placeholder="ENTER VISITOR NAME" maxlength="12">
-                    <button id="saveScoreBtn">START / RESTART</button>
-                    
-                    <div class="high-scores">
-                        TOP AGENTS:
+                    <h3 id="gameModalTitle">NOC TERMINAL</h3>
+                    <p id="gameFinalScoreDisplay" style="display:none; color:var(--accent);">SYSTEM FAILED<br>PROCESSED: <span id="finalScore">0</span></p>
+                    <div class="high-scores" style="margin-bottom: 2rem;">
+                        TOP 5 OPERATORS
                         <ol id="highScoreList">
-                            <!-- JS populated -->
+                            
                         </ol>
                     </div>
+                    <label for="playerName" style="display:block; margin-bottom:0.5rem;">ENTER OPERATOR NAME:</label>
+                    <input type="text" id="playerName" placeholder="[____________]" maxlength="12">
+                    <button id="saveScoreBtn">START GAME</button>
                 </div>
+            </div>
+            <div class="game-instructions" style="text-align:center; font-family:'Departure Mono', monospace; font-size:0.85rem; margin-top:1rem; opacity:0.8;">
+                <p>CONTROLS: [Arrow Keys] or [A/D] to Move Gateway | [Spacebar] to Fire Rate Limits (429)</p>
+                <p style="margin-top:0.5rem; color:var(--accent);">Allow REQUESTS to pass. Destroy THREATS before they hit the gateway or the backend.</p>
+            </div>
             </div>
         </section>
     </main>

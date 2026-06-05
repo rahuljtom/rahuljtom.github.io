@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Nav Visibility
+    const gameSection = document.querySelector('.game-section') || document.getElementById('game');
+    if (gameSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            });
+        }, { threshold: 0.3 }); // Trigger when 30% of the game is visible
+        observer.observe(gameSection);
+    }
     const nav = document.querySelector('.pill-nav');
-    
     if (nav) {
         window.addEventListener('scroll', () => {
             const currentScroll = window.scrollY;
@@ -12,16 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // Work Experience Disclosures
     const workItems = document.querySelectorAll('.work__item');
     workItems.forEach(item => {
         const btn = item.querySelector('.disclose');
         const details = item.querySelector('.work__details');
         const text = item.querySelector('.disclose-text');
-        
         if (!btn || !details || !text) return;
-
         btn.addEventListener('click', () => {
             const isExpanded = btn.getAttribute('aria-expanded') === 'true';
             btn.setAttribute('aria-expanded', !isExpanded);
@@ -29,20 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
             text.textContent = isExpanded ? 'More' : 'Less';
         });
     });
-
-    // Project Accordions
     const projects = document.querySelectorAll('.project');
     projects.forEach(project => {
         const head = project.querySelector('.project__head');
         const body = project.querySelector('.project__body');
         const toggle = project.querySelector('.project__toggle');
-        
         if (!head || !body || !toggle) return;
-
         head.addEventListener('click', () => {
             const isExpanded = head.getAttribute('aria-expanded') === 'true';
-            
-            // Close others (optional, but good for UX)
             projects.forEach(p => {
                 if (p !== project) {
                     p.querySelector('.project__head').setAttribute('aria-expanded', 'false');
@@ -50,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     p.querySelector('.project__toggle').textContent = '+';
                 }
             });
-
             head.setAttribute('aria-expanded', !isExpanded);
             if (isExpanded) {
                 body.style.maxHeight = '0';
@@ -60,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggle.textContent = '−';
             }
         });
-
-        // Keyboard support
         head.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -69,23 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Ambient Music
     const audio = document.getElementById('ambient-audio');
     const toggleBtn = document.getElementById('music-toggle');
     const hint = document.getElementById('music-hint');
-
     if (!audio || !toggleBtn || !hint) return;
-
     const iconMuted = toggleBtn.querySelector('.icon-muted');
     const iconPlaying = toggleBtn.querySelector('.icon-playing');
-
     if (!iconMuted || !iconPlaying) return;
-
     let hasAttemptedAutoplay = false;
-
     audio.volume = 0.35;
-
     const updateAudioIcon = () => {
         if (audio.paused) {
             iconMuted.classList.remove('hidden');
@@ -98,14 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
             hint.classList.add('hidden'); // hide hint when playing
         }
     };
-
     const tryPlay = () => {
         if (!hasAttemptedAutoplay && audio.paused) {
             hasAttemptedAutoplay = true;
             audio.play().then(() => {
                 updateAudioIcon();
             }).catch(() => {
-                // Autoplay blocked
                 hint.classList.remove('hidden');
                 setTimeout(() => {
                     hint.classList.add('hidden');
@@ -113,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     };
-
     toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio.paused) {
@@ -123,49 +110,36 @@ document.addEventListener('DOMContentLoaded', () => {
             updateAudioIcon();
         }
     });
-
-    // Try to play on any user interaction
     ['click', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
         window.addEventListener(evt, () => {
             if (!hasAttemptedAutoplay) tryPlay();
         }, { once: true });
     });
-
-
-    // Beat Glyph Effect
     const glyphMap = {
         'R': ['ℝ', '₹', 'Я', 'Ʀ'],
         'A': ['∀', '@', 'Δ', 'Λ'],
         'H': ['#', 'Ħ', '⊢', 'Ḣ'],
         'U': ['µ', '∪', 'Ǔ', 'Ü'],
         'L': ['|', '£', '∟', 'Ł'],
-      
         'J': ['ʝ', 'Ɉ', 'Ĵ'],
         'O': ['0', 'Ø', '⊙', '°'],
         'S': ['$', '§', '∫', 'Š'],
         'E': ['3', '€', '∈', 'Ξ'],
         'P': ['₱', 'ρ', 'Π', 'Ƥ'],
-      
         'T': ['⊤', '†', '+', 'Ť'],
         'M': ['₥', 'Σ', 'ʍ', 'Ṁ']
       };
-
     const beatElements = document.querySelectorAll('[data-beat-glyph]');
     const BPM = 480;
     const beatInterval = 60000 / BPM; // 125ms per beat
-
-    // Wrap chars in spans
     beatElements.forEach(el => {
         const textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
         if (!textNode) return;
-        
         const text = textNode.textContent;
         const fragment = document.createDocumentFragment();
-        
         for (let i = 0; i < text.length; i++) {
             const char = text[i];
             const span = document.createElement('span');
-            // Only add class if it's a target char (case-insensitive)
             if (glyphMap[char.toUpperCase()]) {
                 span.className = 'ch';
                 span.dataset.orig = char;
@@ -175,24 +149,17 @@ document.addEventListener('DOMContentLoaded', () => {
             span.textContent = char;
             fragment.appendChild(span);
         }
-        
         el.replaceChild(fragment, textNode);
     });
-
     const activeSpans = Array.from(document.querySelectorAll('.ch:not(.static)'));
     let lastBeatTime = 0;
     let beatCount = 0;
-
     function doSwap() {
-        // Reset all
         activeSpans.forEach(span => {
             span.textContent = span.dataset.orig;
             span.classList.remove('beat-active');
         });
-
-        // 2nd beat of 4-beat cycle (so beatCount % 4 === 1)
         if (beatCount % 4 === 1) {
-            // Pick a few random elements
             const count = Math.floor(Math.random() * 2) + 3; // 3 or 4
             for (let i = 0; i < count; i++) {
                 const randomSpan = activeSpans[Math.floor(Math.random() * activeSpans.length)];
@@ -201,14 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const variants = glyphMap[orig];
                 if (variants) {
                     const variant = variants[Math.floor(Math.random() * variants.length)];
-                    // Preserve original casing visually if possible, but the variants are distinct
                     randomSpan.textContent = variant;
                     randomSpan.classList.add('beat-active');
                 }
             }
         }
     }
-
     function loop(time) {
         const clock = audio && !audio.paused ? audio.currentTime * 1000 : time;
         if (clock - lastBeatTime >= beatInterval) {
@@ -218,226 +183,244 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         requestAnimationFrame(loop);
     }
-
     requestAnimationFrame(loop);
-
-    // --- Breakout Game Logic ---
     const canvas = document.getElementById('gameCanvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        const gameScoreEl = document.getElementById('gameScore');
-        const finalScoreEl = document.getElementById('finalScore');
         const modal = document.getElementById('gameModal');
         const modalTitle = document.getElementById('gameModalTitle');
+        const finalScoreEl = document.getElementById('finalScore');
+        const finalScoreDisplay = document.getElementById('gameFinalScoreDisplay');
         const playerNameInput = document.getElementById('playerName');
         const saveScoreBtn = document.getElementById('saveScoreBtn');
         const highScoreList = document.getElementById('highScoreList');
-
         let animationId;
         let isPlaying = false;
-        let score = 0;
-
-        // Physics variables
-        let ballRadius = 6;
-        let x = canvas.width / 2;
-        let y = canvas.height - 30;
-        let dx = 4;
-        let dy = -4;
-
-        let paddleHeight = 10;
-        let paddleWidth = 80;
-        let paddleX = (canvas.width - paddleWidth) / 2;
-
+        let requestsProcessed = 0;
+        let threatsBlocked = 0;
+        let health = 8;
+        let uptimeStr = "99.9%";
+        let gatewayX = canvas.width / 2;
+        const gatewayWidth = 220; // Larger component
+        const gatewayHeight = 40;
+        const gatewayY = canvas.height - 45;
         let rightPressed = false;
         let leftPressed = false;
-
-        let brickRowCount = 5;
-        let brickColumnCount = 9;
-        let brickWidth = 55;
-        let brickHeight = 15;
-        let brickPadding = 8;
-        let brickOffsetTop = 40;
-        let brickOffsetLeft = 20;
-
-        let bricks = [];
-
-        function initBricks() {
-            bricks = [];
-            for(let c=0; c<brickColumnCount; c++) {
-                bricks[c] = [];
-                for(let r=0; r<brickRowCount; r++) {
-                    bricks[c][r] = { x: 0, y: 0, status: 1 };
-                }
-            }
-        }
-
-        // Input Listeners
-        document.addEventListener("keydown", keyDownHandler, false);
-        document.addEventListener("keyup", keyUpHandler, false);
-        canvas.addEventListener("mousemove", mouseMoveHandler, false);
-        canvas.addEventListener("touchmove", touchMoveHandler, {passive: true});
-
-        function keyDownHandler(e) {
+        let spacePressed = false;
+        let lastFireTime = 0;
+        let projectiles = [];
+        let packets = [];
+        let gameStartTime = 0;
+        let waveCount = 0;
+        let spawnMultiplier = 1;
+        let alertText = "";
+        let alertEndTime = 0;
+        const goodTypes = ['GET /health', 'POST /chat', 'PUT /profile', 'GET /users', 'GET /config'];
+        const badTypes = ['DDOS', 'PROMPT_INJECTION', 'SQL_INJECTION', 'TOKEN_FLOOD', 'BGP_HIJACK'];
+        document.addEventListener("keydown", (e) => {
             if(e.key === "Right" || e.key === "ArrowRight") rightPressed = true;
             else if(e.key === "Left" || e.key === "ArrowLeft") leftPressed = true;
-        }
-
-        function keyUpHandler(e) {
+            else if(e.key === " " || e.key === "Spacebar") {
+                spacePressed = true;
+                if(isPlaying) e.preventDefault(); // prevent scrolling
+            }
+        });
+        document.addEventListener("keyup", (e) => {
             if(e.key === "Right" || e.key === "ArrowRight") rightPressed = false;
             else if(e.key === "Left" || e.key === "ArrowLeft") leftPressed = false;
-        }
-
-        function mouseMoveHandler(e) {
-            const relativeX = e.clientX - canvas.getBoundingClientRect().left;
-            if(relativeX > 0 && relativeX < canvas.width) {
-                paddleX = relativeX - paddleWidth/2;
+            else if(e.key === " " || e.key === "Spacebar") spacePressed = false;
+        });
+        function spawnPacket() {
+            const chance = 0.015 * spawnMultiplier;
+            if(Math.random() < chance) {
+                const threatDensity = Math.min(0.3 + (waveCount * 0.05), 0.8);
+                const isBad = Math.random() < threatDensity;
+                const textArray = isBad ? badTypes : goodTypes;
+                const text = textArray[Math.floor(Math.random() * textArray.length)];
+                ctx.font = "14px 'Departure Mono', monospace";
+                const textWidth = ctx.measureText(text).width;
+                const width = isBad ? textWidth + 30 : textWidth + 16; 
+                packets.push({
+                    x: Math.random() * (canvas.width - width - 20) + 10,
+                    y: -40,
+                    text: text,
+                    isBad: isBad,
+                    width: width,
+                    height: 24,
+                    speed: (Math.random() * 1.5 + 1) * (1 + waveCount*0.1)
+                });
             }
         }
-
-        function touchMoveHandler(e) {
-            if(e.touches && e.touches[0]) {
-                const relativeX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
-                if(relativeX > 0 && relativeX < canvas.width) {
-                    paddleX = relativeX - paddleWidth/2;
+        function triggerWaveAlert() {
+            const incidents = ['DDOS ATTACK', 'TOKEN FLOOD', 'PROMPT INJECTION CAMPAIGN', 'SQL MAP SCAN'];
+            const incident = incidents[Math.floor(Math.random() * incidents.length)];
+            alertText = `[ INCIDENT DETECTED: ${incident} ]`;
+            alertEndTime = Date.now() + 3000;
+        }
+        function drawGateway(ctx, x, y, width, textColor) {
+            ctx.textAlign = "center";
+            ctx.fillStyle = textColor;
+            ctx.font = "16px 'Departure Mono', monospace";
+            ctx.fillText("════════════════════════════", x, y);
+            ctx.fillText("║     API GATEWAY      ║", x, y + 20);
+            ctx.fillText("════════════════════════════", x, y + 40);
+        }
+        function drawPacket(ctx, pkt, textColor) {
+            ctx.textAlign = "center";
+            ctx.font = "14px 'Departure Mono', monospace";
+            if(pkt.isBad) {
+                ctx.fillStyle = textColor; // Invert? Maybe just keep standard mono
+                ctx.fillText(`< ${pkt.text} >`, pkt.x + pkt.width/2, pkt.y + 16);
+            } else {
+                ctx.fillStyle = textColor;
+                ctx.fillText(`[ ${pkt.text} ]`, pkt.x + pkt.width/2, pkt.y + 16);
+            }
+        }
+        function drawProjectile(ctx, p, textColor) {
+            ctx.fillStyle = textColor;
+            ctx.textAlign = "center";
+            ctx.font = "14px 'Departure Mono', monospace";
+            ctx.fillText("▲ 429", p.x, p.y);
+        }
+        function draw() {
+            if(!isPlaying) return;
+            const now = Date.now();
+            if (now - gameStartTime > (waveCount + 1) * 10000) {
+                waveCount++;
+                spawnMultiplier += 0.5;
+                triggerWaveAlert();
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const textColor = getComputedStyle(canvas).color || '#1c1914';
+            if(now < alertEndTime) {
+                if (Math.floor(now / 200) % 2 === 0) {
+                    ctx.fillStyle = textColor;
+                    ctx.textAlign = "center";
+                    ctx.font = "bold 16px 'Departure Mono', monospace";
+                    ctx.fillText(alertText, canvas.width/2, canvas.height/2);
                 }
             }
-        }
-
-        function collisionDetection() {
-            for(let c=0; c<brickColumnCount; c++) {
-                for(let r=0; r<brickRowCount; r++) {
-                    let b = bricks[c][r];
-                    if(b.status === 1) {
-                        if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                            dy = -dy;
-                            b.status = 0;
-                            score += 10;
-                            gameScoreEl.textContent = score.toString().padStart(4, '0');
-                            if(score === brickRowCount * brickColumnCount * 10) {
-                                gameOver(true);
-                            }
+            ctx.fillStyle = textColor;
+            ctx.font = "12px 'Departure Mono', monospace";
+            ctx.textAlign = "left";
+            let dynamicLatency = Math.floor(Math.random() * 5 + 15 + waveCount * 2);
+            ctx.fillText(`REQUESTS PROCESSED: ${requestsProcessed.toString().padStart(4, '0')}`, 10, 20);
+            ctx.fillText(`THREATS BLOCKED: ${threatsBlocked.toString().padStart(4, '0')}`, 10, 40);
+            ctx.fillText(`LATENCY: ${dynamicLatency}ms`, canvas.width - 150, 20);
+            ctx.fillText(`UPTIME: ${uptimeStr}`, canvas.width - 150, 40);
+            ctx.fillText(`GATEWAY HEALTH: ${'█'.repeat(health)}`, canvas.width/2 - 70, 20);
+            if(rightPressed && gatewayX < canvas.width - gatewayWidth/2 + 20) gatewayX += 5 + (waveCount * 0.2);
+            if(leftPressed && gatewayX > gatewayWidth/2 - 20) gatewayX -= 5 + (waveCount * 0.2);
+            if(spacePressed && now - lastFireTime > 250) {
+                projectiles.push({ x: gatewayX, y: gatewayY - 5 });
+                lastFireTime = now;
+            }
+            drawGateway(ctx, gatewayX, gatewayY, gatewayWidth, textColor);
+            for(let i = projectiles.length - 1; i >= 0; i--) {
+                let p = projectiles[i];
+                p.y -= 7;
+                drawProjectile(ctx, p, textColor);
+                if(p.y < 0) projectiles.splice(i, 1);
+            }
+            spawnPacket();
+            for(let i = packets.length - 1; i >= 0; i--) {
+                let pkt = packets[i];
+                pkt.y += pkt.speed;
+                drawPacket(ctx, pkt, textColor);
+                if(pkt.y + pkt.height > gatewayY && pkt.y < gatewayY + gatewayHeight) {
+                    if(pkt.x + pkt.width > gatewayX - gatewayWidth/2 && pkt.x < gatewayX + gatewayWidth/2) {
+                        if(pkt.isBad) {
+                            health--;
+                            if (health <= 3) uptimeStr = "98.1%";
+                        } else {
+                            requestsProcessed++;
+                        }
+                        packets.splice(i, 1);
+                        continue;
+                    }
+                }
+                if(pkt.y > canvas.height) {
+                    if(pkt.isBad) health--;
+                    packets.splice(i, 1);
+                    continue;
+                }
+                let hit = false;
+                for(let j = projectiles.length - 1; j >= 0; j--) {
+                    let p = projectiles[j];
+                    if(p.x > pkt.x && p.x < pkt.x + pkt.width && p.y < pkt.y + pkt.height && p.y > pkt.y) {
+                        if(pkt.isBad) {
+                            threatsBlocked++;
+                            hit = true;
+                            projectiles.splice(j, 1);
+                            break;
                         }
                     }
                 }
-            }
-        }
-
-        function drawBall() {
-            ctx.beginPath();
-            ctx.rect(x - ballRadius, y - ballRadius, ballRadius * 2, ballRadius * 2);
-            ctx.fillStyle = "#fff";
-            ctx.fill();
-            ctx.closePath();
-        }
-
-        function drawPaddle() {
-            ctx.beginPath();
-            ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#fff";
-            ctx.fill();
-            ctx.closePath();
-        }
-
-        function drawBricks() {
-            for(let c=0; c<brickColumnCount; c++) {
-                for(let r=0; r<brickRowCount; r++) {
-                    if(bricks[c][r].status === 1) {
-                        let brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-                        let brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-                        bricks[c][r].x = brickX;
-                        bricks[c][r].y = brickY;
-                        ctx.beginPath();
-                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = "#745d44"; // Accent color
-                        ctx.fill();
-                        ctx.closePath();
-                    }
+                if(hit) {
+                    packets.splice(i, 1);
                 }
             }
-        }
-
-        function draw() {
-            if(!isPlaying) return;
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBricks();
-            drawBall();
-            drawPaddle();
-            collisionDetection();
-
-            if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) dx = -dx;
-            if(y + dy < ballRadius) {
-                dy = -dy;
-            } else if(y + dy > canvas.height-ballRadius) {
-                if(x > paddleX && x < paddleX + paddleWidth) {
-                    dy = -dy;
-                    // Add slight angle based on hit position
-                    dx = 8 * ((x-(paddleX+paddleWidth/2))/paddleWidth);
-                } else {
-                    gameOver(false);
-                    return;
-                }
+            if(health <= 0) {
+                gameOver();
+                return;
             }
-
-            if(rightPressed && paddleX < canvas.width-paddleWidth) paddleX += 7;
-            else if(leftPressed && paddleX > 0) paddleX -= 7;
-
-            x += dx;
-            y += dy;
             animationId = requestAnimationFrame(draw);
         }
-
         function startGame() {
-            initBricks();
-            score = 0;
-            gameScoreEl.textContent = '0000';
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            dx = 4;
-            dy = -4;
-            paddleX = (canvas.width - paddleWidth) / 2;
+            let name = playerNameInput.value.trim().toUpperCase();
+            if (!name) name = 'ANONYMOUS';
+            playerNameInput.dataset.currentName = name;
+            requestsProcessed = 0;
+            threatsBlocked = 0;
+            health = 8;
+            uptimeStr = "99.9%";
+            gatewayX = canvas.width / 2;
+            projectiles = [];
+            packets = [];
+            waveCount = 0;
+            spawnMultiplier = 1;
+            gameStartTime = Date.now();
+            alertText = "";
+            alertEndTime = 0;
             isPlaying = true;
             modal.classList.add('hidden');
+            finalScoreDisplay.style.display = 'none';
             draw();
         }
-
-        function gameOver(win) {
+        function gameOver() {
             isPlaying = false;
             cancelAnimationFrame(animationId);
-            modalTitle.textContent = win ? "SYSTEM SECURED" : "SYSTEM FAILED";
-            finalScoreEl.textContent = score;
+            let name = playerNameInput.dataset.currentName || 'ANONYMOUS';
+            let scores = JSON.parse(localStorage.getItem('sys_noc_scores') || '[]');
+            scores.push({name, score: requestsProcessed});
+            scores.sort((a,b) => b.score - a.score);
+            localStorage.setItem('sys_noc_scores', JSON.stringify(scores));
+            modalTitle.textContent = "NOC TERMINAL";
+            finalScoreEl.textContent = requestsProcessed;
+            finalScoreDisplay.style.display = 'block';
             modal.classList.remove('hidden');
             loadHighScores();
         }
-
-        // High Score System
         function loadHighScores() {
-            let scores = JSON.parse(localStorage.getItem('sys_highscores') || '[]');
+            let scores = JSON.parse(localStorage.getItem('sys_noc_scores') || '[]');
             highScoreList.innerHTML = '';
             if (scores.length === 0) {
                 highScoreList.innerHTML = '<li>NO RECORDS FOUND</li>';
                 return;
             }
-            scores.slice(0, 5).forEach(s => {
+            scores.slice(0, 5).forEach((s, idx) => {
                 let li = document.createElement('li');
-                li.textContent = `${s.name.padEnd(12, '.')} ${s.score.toString().padStart(4, '0')}`;
+                li.textContent = `${(idx+1).toString() + "."} ${s.name.padEnd(10, ' ')} ${s.score.toString().padStart(4, ' ')}`;
                 highScoreList.appendChild(li);
             });
         }
-
         saveScoreBtn.addEventListener('click', () => {
-            if(score > 0 || localStorage.getItem('sys_highscores') === null) {
-                let name = playerNameInput.value.trim().toUpperCase() || 'ANONYMOUS';
-                let scores = JSON.parse(localStorage.getItem('sys_highscores') || '[]');
-                scores.push({name, score});
-                scores.sort((a,b) => b.score - a.score);
-                localStorage.setItem('sys_highscores', JSON.stringify(scores));
-                playerNameInput.value = '';
+            if (playerNameInput.value.trim().length === 0 && localStorage.getItem('sys_noc_scores') === null) {
+                 playerNameInput.focus();
+                 return;
             }
             startGame();
         });
-
-        // Initialize display
         loadHighScores();
     }
 });
