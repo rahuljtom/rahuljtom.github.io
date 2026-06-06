@@ -70,13 +70,13 @@ a {
   color: inherit;
   text-decoration: none;
   transition: color 250ms var(--ease);
-  cursor: crosshair;
+  cursor: url('images/cursor-pointer.png'), pointer;
 }
 a:hover {
   color: var(--accent);
 }
 button {
-  cursor: crosshair;
+  cursor: url('images/cursor-pointer.png'), pointer;
 }
 ul {
   list-style: none;
@@ -642,6 +642,10 @@ h2 {
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     border: 1px solid #333;
+    transition: transform 0.3s ease;
+}
+.badge-card:hover {
+    transform: rotate(0deg) scale(1.02);
 }
 .badge-card:hover {
     transform: rotate(0deg) scale(1.02);
@@ -711,6 +715,7 @@ h2 {
 .departures-wrapper {
     overflow-x: auto;
     margin: 3rem 0;
+    width: 100%;
 }
 .departures {
     width: 100%;
@@ -720,7 +725,6 @@ h2 {
     background: #e6e2da;
     color: #1c1914;
     border: 1px solid #1c1914;
-    min-width: 600px;
 }
 .departures th, .departures td {
     padding: 0.8rem 1rem;
@@ -815,7 +819,7 @@ h2 {
     border: none;
     padding: 0.5rem 1rem;
     font-family: inherit;
-    cursor: crosshair;
+    cursor: url('images/cursor-pointer.png'), pointer;
     text-transform: uppercase;
     font-size: 0.9rem;
 }
